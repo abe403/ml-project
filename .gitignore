@@ -1,0 +1,22 @@
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Dataset (Too large for GitHub)
+dataset/
+
+# Results (Optional, but better to keep repo clean)
+results/
+
+# User-specific cache
+.cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
