@@ -13,16 +13,16 @@ def evaluate_clustering(true_labels, predicted_clusters, class_names, output_dir
     x = np.arange(num_classes)
     width = 0.35
     fig, ax = plt.subplots(figsize=(10, 6))
-    rects1 = ax.bar(x - width/2, true_distribution, width, label='True Elements per Class')
-    rects2 = ax.bar(x + width/2, pred_distribution, width, label='Elements in Competitive Clusters')
-    ax.set_ylabel('Number of Images')
-    ax.set_title('Comparison: True Classes vs. Competitive Network Clusters')
+    rects1 = ax.bar(x - width/2, true_distribution, width, label='Elementos Verdaderos por Clase')
+    rects2 = ax.bar(x + width/2, pred_distribution, width, label='Elementos en Clústers Competitivos')
+    ax.set_ylabel('Número de Imágenes')
+    ax.set_title('Comparación: Clases Verdaderas vs. Clústers de Red Competitiva')
     ax.set_xticks(x)
     ax.set_xticklabels(class_names, rotation=45)
     ax.legend()
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, 'distribution_comparison.png'))
-    print("Saved distribution comparison chart to results/distribution_comparison.png")
+    print("Gráfico de comparación de distribución guardado en results/distribution_comparison.png")
     plt.close()
     cluster_compositions = {i: {j: 0 for j in range(num_classes)} for i in range(num_classes)}
     for true_l, pred_c in zip(true_labels.numpy(), predicted_clusters.numpy()):
@@ -32,9 +32,9 @@ def evaluate_clustering(true_labels, predicted_clusters, class_names, output_dir
     for i in range(num_classes):
         composition = [cluster_compositions[i][j] for j in range(num_classes)]
         axes[i].bar(class_names, composition, color='skyblue')
-        axes[i].set_title(f'Cluster {i} Composition')
+        axes[i].set_title(f'Composición del Clúster {i}')
         axes[i].tick_params(axis='x', rotation=45)
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, 'cluster_compositions.png'))
-    print("Saved cluster composition charts to results/cluster_compositions.png")
+    print("Gráficos de composición de clústers guardados en results/cluster_compositions.png")
     plt.close()

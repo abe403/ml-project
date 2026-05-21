@@ -24,15 +24,15 @@ class CompetitiveNetwork(nn.Module):
         N = data.shape[0]
         data_norm = torch.norm(data, p=2, dim=1, keepdim=True)
         data_normalized = data / (data_norm + 1e-8)
-        print("Training Competitive Network...")
+        print("Entrenando Red Competitiva...")
         for epoch in range(epochs):
             lr = self.initial_lr * (1.0 - epoch / epochs)
             indices = torch.randperm(N)
-            for i in tqdm(indices, desc=f"Epoch {epoch+1}/{epochs}", leave=False):
+            for i in tqdm(indices, desc=f"Época {epoch+1}/{epochs}", leave=False):
                 x = data_normalized[i]
                 diff = x.unsqueeze(0) - self.weights
                 distances = torch.norm(diff, p=2, dim=1)
                 winner_idx = torch.argmin(distances)
                 self.weights.data[winner_idx] += lr * (x - self.weights.data[winner_idx])
             self._normalize_weights()
-        print("Training completed.")
+        print("Entrenamiento completado.")

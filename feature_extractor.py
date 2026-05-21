@@ -13,7 +13,7 @@ def extract_features(data_loader, device='cuda'):
     model.eval()
     all_features = []
     all_labels = []
-    print("Extracting features using ResNet-18...")
+    print("Extrayendo características usando ResNet-18...")
     with torch.no_grad():
         for images, labels in data_loader:
             images = images.to(device)

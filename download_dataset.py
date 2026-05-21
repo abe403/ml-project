@@ -1,15 +1,15 @@
 import kagglehub
 import os
 import shutil
-print("Downloading dataset...")
+print("Descargando dataset...")
 path = kagglehub.dataset_download("feyzazkefe/trashnet")
-print("Path to dataset files:", path)
+print("Ruta de los archivos del dataset:", path)
 target_dir = "./dataset"
 content = os.listdir(path)
-print("Content of downloaded path:", content)
+print("Contenido de la ruta descargada:", content)
 if not os.path.exists(target_dir):
     os.makedirs(target_dir)
-print(f"Copying files to {target_dir}...")
+print(f"Copiando archivos a {target_dir}...")
 source_path = path
 if 'dataset-original' in content:
     source_path = os.path.join(path, 'dataset-original')
@@ -24,4 +24,4 @@ for item in os.listdir(source_path):
         shutil.copytree(s, d)
     else:
         shutil.copy2(s, d)
-print("Dataset is ready in ./dataset")
+print("El dataset está listo en ./dataset")
