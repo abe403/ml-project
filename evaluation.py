@@ -36,5 +36,22 @@ def evaluate_clustering(true_labels, predicted_clusters, class_names, output_dir
         axes[i].tick_params(axis='x', rotation=45)
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, 'cluster_compositions.png'))
-    print("Gráficos de composición de clústers guardados en results/cluster_compositions.png")
+    print("\nGráficos de composición de clústers guardados en results/cluster_compositions.png")
     plt.close()
+
+    print("\n==================================================")
+    print("MÉTRICAS DE DISTRIBUCIÓN DE CLÚSTERS COMPETITIVOS")
+    print("==================================================")
+    print("Distribución total de elementos por clúster:")
+    for i in range(num_classes):
+        print(f"  Clúster {i}: {pred_counts.get(i, 0)} elementos")
+
+    print("\nComposición detallada de cada clúster:")
+    for i in range(num_classes):
+        print(f"  Clúster {i}:")
+        composition = cluster_compositions[i]
+        for class_idx, count in composition.items():
+            if count > 0:
+                print(f"    - {class_names[class_idx]}: {count} imágenes")
+    print("==================================================")
+

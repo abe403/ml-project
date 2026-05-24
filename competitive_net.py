@@ -22,6 +22,12 @@ class CompetitiveNetwork(nn.Module):
         return winners
     def train_network(self, data, epochs=50):
         N = data.shape[0]
+        
+        # Inicialización basada en datos para evitar neuronas muertas
+        indices_iniciales = torch.randperm(N)[:self.num_clusters]
+        self.weights.data = data[indices_iniciales].clone()
+        self._normalize_weights()
+
         data_norm = torch.norm(data, p=2, dim=1, keepdim=True)
         data_normalized = data / (data_norm + 1e-8)
         print("Entrenando Red Competitiva...")
